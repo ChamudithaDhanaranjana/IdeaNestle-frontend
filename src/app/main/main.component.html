@@ -1,0 +1,64 @@
+<!-- component -->
+  <div *ngFor="let post of posts" class=" max-w-mb w-full bg-gray-100 mb-8 lg:flex lg:ml-28">
+    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('https://source.unsplash.com/200x200/?random?{{ post?.title }}')" title="Woman holding a mug">
+    </div>
+    <div class="border-r border-b border-l border-gray-100 lg:border-l-0 lg:border-t lg:border-gray-100 bg-gray-100 rounded-b max-w-screen-xl w-full lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div class="mb-8">
+        <p class="text-sm text-grey-dark flex items-center">
+          {{post.categories}}
+        </p>
+        <div class="text-black font-bold text-xl mb-2">{{ post.title }}</div>
+        <p class="text-grey-darker text-base truncate sm:w-4/5 hover:text-clip">{{post.content}}</p>
+      </div>
+      <div class="flex items-center">
+        <img class="w-10 h-10 rounded-full mr-4" src="assets\img\profile.jpeg" alt="Avatar of profile pic">
+        <div class="text-sm">
+          <p class="text-black font-bold">{{post.username}}</p>
+          <p class="text-grey-dark leading-none"><time pubdate datetime="2022-02-08" title="February 8th, 2022">{{post.localDate}}</time></p>
+        </div>
+        <div class="sm:grid grid-cols-3 lg:grid-cols-8">
+            <div class="col-start-8 ">
+                <div class="ml-28 sm:ml-auto">
+                    <a [routerLink]="['/post', post.id]" class="px-2 py-2 text-white uppercase bg-yellow-500 border-2 border-transparent rounded-lg text-md hover:bg-orange-400">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center items-center mb-8">
+    <div class="pagination">
+      <nav>
+        <ul class="list-style-none flex">
+          <li>
+            <a
+              class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+              aria-label="Previous">
+              <span aria-hidden="true" class="mr-4 ml-2">&laquo;</span>
+              <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+            </a>
+          </li>
+          <li>
+            <a
+              class="relative block rounded bg-transparent mr-2 ml-2 px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+              ><button class="mr-2 ml-2 border-2 pl-1 pr-1" *ngFor="let page of totalPagesArray()" [class.active]="page === currentPage" (click)="onPageChange(page)">
+                {{ page + 1 }}
+              </button></a
+            >
+          <li>
+            <a
+              class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+              aria-label="Next"
+              >
+              <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Next</button>
+              <span aria-hidden="true" class="ml-4">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  
+    

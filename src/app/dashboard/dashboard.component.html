@@ -1,0 +1,211 @@
+<!-- component -->
+<div class="md:col-span-2 sm:ml-32 mb-8 mt-4 mx-4 xl:col-span-3">
+  <h3 class="text-lg font-semibold">My draft</h3>
+</div>
+<div *ngIf="drafts">
+  <div  *ngFor="let draft of drafts" class=" max-w-mb w-full bg-gray-100 mb-12 lg:flex lg:ml-28">
+    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('https://source.unsplash.com/200x200/?random?{{ draft?.title }}')" title="Woman holding a mug">
+    </div>
+    <div class="border-r border-b border-l border-gray-100 lg:border-l-0 lg:border-t lg:border-gray-100 bg-gray-100 rounded-b max-w-screen-xl w-full lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div class="mb-8">
+        <p class="text-sm text-grey-dark flex items-center">
+        </p>
+        <div class="text-black font-bold text-xl mb-2">{{ draft.title }}</div>
+        <p class="text-grey-darker text-base truncate sm:w-4/5 hover:text-clip">{{draft.content}}</p>
+      </div>
+      <div class="flex items-center">
+        <img class="w-10 h-10 rounded-full mr-4" src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg" alt="Avatar of Jonathan Reinink">
+        <div class="text-sm">
+          <p class="text-grey-dark">{{draft.localDate}}</p>
+        </div>
+        <div class="sm:grid grid-cols-3 lg:grid-cols-4">
+            <div class="col-start-4 flex justify-between items-center">
+                <div class="ml-12">
+                  <button (click)="deleteDraft(draft.id)" class="px-2 py-2 text-white uppercase bg-red-800 border-2 border-transparent rounded-lg text-md hover:bg-orange-400">
+                    Delete
+                    </button>
+                    <button (click)="editDraft(draft)" class="px-2 py-2 ml-8 text-white uppercase bg-yellow-500 border-2 border-transparent rounded-lg text-md hover:bg-orange-400">
+                        Edit
+                    </button>
+                </div>
+            </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="md:col-span-2 sm:ml-32 mb-8 mt-4 mx-4 xl:col-span-3">
+  <h3 class="text-lg font-semibold">My Posts</h3>
+</div>
+<div *ngIf="posts">
+  <div  *ngFor="let post of posts" class=" max-w-mb w-full bg-gray-100 mb-12 lg:flex lg:ml-28">
+    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('https://source.unsplash.com/200x200/?random?{{ post?.title }}')" title="Woman holding a mug">
+    </div>
+    <div class="border-r border-b border-l border-gray-100 lg:border-l-0 lg:border-t lg:border-gray-100 bg-gray-100 rounded-b max-w-screen-xl w-full lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div class="mb-8">
+        <p class="text-sm text-grey-dark flex items-center">
+        </p>
+        <div class="text-black font-bold text-xl mb-2">{{ post.title }}</div>
+        <p class="text-grey-darker text-base truncate sm:w-4/5 hover:text-clip">{{post.content}}</p>
+      </div>
+      <div class="flex items-center">
+        <img class="w-10 h-10 rounded-full mr-4" src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg" alt="Avatar of Jonathan Reinink">
+        <div class="text-sm">
+          <p class="text-grey-dark">{{post.localDate}}</p>
+        </div>
+        <div class="sm:grid grid-cols-3 lg:grid-cols-4">
+            <div class="col-start-4 flex justify-between items-center">
+                <div class="ml-12">
+                  <button (click)="deletePost(post.id)" class="px-2 py-2 text-white uppercase bg-red-800 border-2 border-transparent rounded-lg text-md hover:bg-orange-400">
+                    Delete
+                    </button>
+                    <button (click)="editDraft(post)" class="px-2 py-2 ml-8 text-white uppercase bg-yellow-500 border-2 border-transparent rounded-lg text-md hover:bg-orange-400">
+                        Edit
+                    </button>
+                </div>
+            </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center items-center mb-8">
+  <div class="pagination">
+    <nav>
+      <ul class="list-style-none flex">
+        <li>
+          <a
+            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+            aria-label="Previous">
+            <span aria-hidden="true" class="mr-4 ml-2">&laquo;</span>
+            <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+          </a>
+        </li>
+        <li>
+          <a
+            class="relative block rounded bg-transparent mr-2 ml-2 px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+            ><button class="mr-2 ml-2 border-2 pl-1 pr-1" *ngFor="let page of totalPagesArray()" [class.active]="page === currentPage" (click)="onPageChange(page)">
+              {{ page + 1 }}
+            </button></a
+          >
+        <li>
+          <a
+            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+            aria-label="Next"
+            >
+            <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Next</button>
+            <span aria-hidden="true" class="ml-4">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div>
+  <div class="md:col-span-2 sm:ml-32 mt-4 mx-4 xl:col-span-3">
+    <h3 class="text-lg font-semibold">My contribution summary of recent sprints</h3>
+  </div>
+  <div class="mt-4 mb-12 mx-4 sm:mx-28">
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3">Post Title</th>
+              <th class="px-4 py-3">Contribution Id</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-1 py-3"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            <tr *ngFor="let contribution of contributions">
+              <td class="px-4 py-3 text-xs">
+                <span>{{contribution.id}}</span>
+              </td>
+              <td class="px-4 py-3 text-xs">
+                <span>{{contribution.contributor.username}}</span>
+              </td>
+              <td class="px-4 py-3 text-xs">
+                <span>{{contribution.approved}}</span>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                <div class="relative w-full max-w-full ml-auto flex-grow flex-4 text-right">
+                    <button  [routerLink]="['/contribution', contribution.id]" class="bg-green-500 dark:bg-gray-100 text-white active:bg-green-600 dark:text-gray-800 dark:active:text-gray-700 font-bold uppercase px-4 py-1 rounded outline-none focus:outline-none ml-4 ease-linear transition-all duration-150" type="button">Read more</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <span class="flex items-center col-span-3"> Showing 21-30 of 100 </span>
+        <span class="col-span-2"></span>
+        <!-- Pagination -->
+        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+          <nav aria-label="Table navigation">
+            <ul class="inline-flex items-center">
+              <li>
+                <button  class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous">
+                  <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                    <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <button  class="px-3 py-1 text-black rounded-md focus:outline-none focus:shadow-outline-purple"></button>
+              </li>
+              <li>
+                <button  class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next">
+                  <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                    <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </span>                
+      </div>
+    </div>
+  </div>
+  <div class="md:col-span-2 sm:ml-32 mt-4 mx-4 xl:col-span-3">
+    <h3 class="text-lg font-semibold">Contribution summary of recent sprints</h3>
+  </div>
+</div>
+<div class="container mt-4">
+  <!-- Your content here -->
+  <div class="mt-8 sm:ml-48">
+    <div *ngIf="paginatedPostsWithContributions" class="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Loop through the paginated postsWithContributions array -->
+      <ng-container *ngFor="let item of paginatedPostsWithContributions">
+        <div *ngFor="let contribution of item?.contributions">
+          <article class="flex flex-col dark:bg-gray-900">
+            <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
+              <img alt="" class="object-cover w-full h-52 dark:bg-gray-500"
+                src="https://source.unsplash.com/200x200/?random?{{ item?.post?.title }}">
+            </a>
+            <div class="flex flex-col flex-1 p-6">
+              <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
+              <a rel="noopener noreferrer" [routerLink]="['/contribution', contribution.id]"
+                class="text-xs tracking uppercase hover:underline dark:text-violet-400">Read Me</a>
+              <h3 class="flex-1 py-2 text-lg font-semibold leading-tight">{{ item.post.title }}</h3>
+              <div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
+                <span>{{ contribution?.contributor?.username }}</span>
+                <span>{{ contribution?.contributor?.email }}</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </ng-container>
+    </div>        
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="flex justify-center mt-4">
+    <ul class="flex space-x-2">
+      <li *ngFor="let page of totalPagesArray()">
+        <a class="cursor-pointer" (click)="onPageChange(page + 1)">{{ page + 1 }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+

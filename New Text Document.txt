@@ -1,0 +1,4 @@
+<app-search [placeholderText]="'Search users'" (searchEvent)="onSearch($event)"></app-search>
+
+
+https://www.bezkoder.com/angular-16-pagination-ngx/
