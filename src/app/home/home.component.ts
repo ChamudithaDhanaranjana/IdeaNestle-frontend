@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   searchTerm: string = '';
   isLoggedIn: boolean = false;
   filteredPosts: any[] = [];
+  hideMouseElement = false;
 
   constructor(private postService: PostService, private authService: AuthService, private http: HttpClient) {}
   reloadCurrentRoute() {
@@ -21,6 +22,13 @@ export class HomeComponent implements OnInit {
   
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isAuthenticated();
+  }
+  @HostListener('window:scroll', [])
+  onScroll() {
+    // Check if the user has scrolled
+    if (!this.hideMouseElement && window.scrollY > 0) {
+      this.hideMouseElement = true;
+    }
   }
 
   onSearch() {

@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:14 as build
+FROM node:16 as build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,13 +17,13 @@ RUN npm install
 COPY . .
 
 # Build the Angular application
-RUN ng build --prod
+RUN ng build --configuration=production
 
 # Use an official Nginx image as the final image
 FROM nginx:alpine
 
 # Copy the built Angular app from the previous stage to the Nginx directory
-COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
+COPY --from=build /app/dist/idea-nestle-frontend /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80

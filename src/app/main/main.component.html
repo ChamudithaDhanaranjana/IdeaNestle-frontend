@@ -17,10 +17,28 @@
           <p class="text-grey-dark leading-none"><time pubdate datetime="2022-02-08" title="February 8th, 2022">{{post.localDate}}</time></p>
         </div>
         <div class="sm:grid grid-cols-3 lg:grid-cols-8">
-            <div class="col-start-8 ">
-                <div class="ml-28 sm:ml-auto">
-                    <a [routerLink]="['/post', post.id]" class="px-2 py-2 text-white uppercase bg-yellow-500 border-2 border-transparent rounded-lg text-md hover:bg-orange-400">
-                        Read More
+            <div class="col-start-8">
+                <div class="ml-48 sm:ml-12">
+                    <a [routerLink]="['/post', post.id]" class="">
+                      <div class='container'>
+                        <ul>
+                          <li>
+                            <a class='animated-arrow' href='https://google.com'>
+                              <span class='the-arrow -left'>
+                                <span class='shaft'></span>
+                              </span>
+                              <span class='main'>
+                                <span class='text'>
+                                  Read
+                                </span>
+                                <span class='the-arrow -right'>
+                                  <span class='shaft'></span>
+                                </span>
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </a>
                 </div>
             </div>

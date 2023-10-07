@@ -215,6 +215,17 @@ export class DashboardComponent implements OnInit {
   goToPage(pageNumber: number): void {
     this.currentPage = pageNumber;
   }
+  
+  approveContribution(contributionId: string) {
+    this.contributionService.approveContribution(contributionId).subscribe(
+      (response) => {
+        console.log('Contribution accepted', response);
+      },
+      (error) => {
+        console.error('Error accepting contribution', error);
+      }
+    );
+  }
 
   showSucces() {
     const message = 'Delete Succesfully';

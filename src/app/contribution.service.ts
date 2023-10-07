@@ -30,5 +30,9 @@ export class ContributionService {
   deleteContribution(contributionId: string): Observable<any> {
     return this.http.delete(`${this.backendApiUrl}/${contributionId}`);
   }
+
+  approveContribution(contributionId: string): Observable<any> {
+    return this.http.post(`${this.backendApiUrl}/approve/${contributionId}`, {});
+  }
   
 }

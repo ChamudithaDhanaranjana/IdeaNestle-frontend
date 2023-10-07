@@ -59,10 +59,8 @@ openConfirmationDialog(contributionId: string): void {
   });
 }
 
-
 deleteContribution(contributionId: string): void {
   this.confirmationDialogService.openConfirmationDialog();
-
   this.confirmationDialogService.getConfirmationResult().subscribe(confirmed => {
     if (confirmed) {
       this.contributionService.deleteContribution(contributionId).subscribe(
