@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,11 @@ export class ContributionService {
   
   contributionContent: string = '';
 
-  private backendApiUrl = 'http://localhost:8080/api/contributions';
+  backendApiUrl
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { 
+    this.backendApiUrl = environment.apiUrl+ "/contributions"
+  }
 
   getContributionCountByUserId(userId: string): Observable<number> {
     const url = `${this.backendApiUrl}/user/${userId}/count`;

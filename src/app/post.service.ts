@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Post } from './post';
 import { Contribution } from './contribution';
+import { environment } from '../environments/environment';
 
 
 @Injectable({
@@ -11,9 +12,11 @@ import { Contribution } from './contribution';
 export class PostService {
   
   
-  private backendApiUrl = 'http://localhost:8080/api'; 
+  backendApiUrl
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.backendApiUrl = environment.apiUrl
+  }
 
   getAllPosts(pageNumber: number, firstLetter?: string) {
     let params = new HttpParams().set('page', pageNumber.toString());

@@ -33,6 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -54,7 +56,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     WelcomeDialogComponent,
     ErrorDialogComponent,
     ContributionComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
